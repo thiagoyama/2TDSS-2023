@@ -20,7 +20,8 @@ namespace Fiap.HelloWorld.UI.Models
         }
 
         //Métodos
-        public void Falar(string fala)
+        //virtual -> permite a sobrescrita do método
+        public virtual void Falar(string fala)
         {
             Console.WriteLine($"Pessoa falando: {fala}");
         }

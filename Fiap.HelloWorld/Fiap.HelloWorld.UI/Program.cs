@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Fiap.HelloWorld.UI.Models;
+using Fiap.HelloWorld.UI.Repositories;
 
 Console.WriteLine("Hello, World!");
 
@@ -19,9 +20,34 @@ cliente.Telefone = "11 9854-5456";
 Console.WriteLine(cliente.Telefone);
 
 //Instanciar uma Pessoa com o nome e genero
-Pessoa pessoa = new Funcionario("Juan")
+Funcionario pessoa = new Funcionario("Juan")
 {    
-    Genero = 'M'
+    Genero = 'M',
+    TipoContrato = TipoContrato.Clt
 };
 
+cliente.Falar("Quero desconto!");
+
+//Adicionar um tipo de contrato para o funcionario
+pessoa.TipoContrato = TipoContrato.Pj;
+
+//Exibir o tipo de contrato
+Console.WriteLine(pessoa.TipoContrato);
+
+//Instanciar um repository
+var repository = new PessoaRepository();
+
+//Cadastrar duas pessoas
+repository.Cadastrar(cliente);
+repository.Cadastrar(pessoa);
+
+//Exibir a quantidade de pessoas
+Console.WriteLine($"Pessoas cadastradas: {repository.Contar()}");
+
+//Exibir o nome de todas as pessoas cadastradas
+var lista = repository.Listar();
+foreach (var item in lista)
+{
+    Console.WriteLine(item.Nome);
+}
 

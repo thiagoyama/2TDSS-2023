@@ -38,7 +38,10 @@ namespace Fiap.HelloWorld.UI.Models
         }
 
         //Sobrescrever o Falar da Pessoa
-
+        public override void Falar(string fala)
+        {
+            Console.WriteLine($"Cliente Falando: {fala}");
+        }
 
     }
 }

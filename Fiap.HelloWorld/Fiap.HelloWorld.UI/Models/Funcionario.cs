@@ -10,6 +10,8 @@ namespace Fiap.HelloWorld.UI.Models
     {
         private string _cargo;
 
+        public TipoContrato TipoContrato { get; set; } 
+
         //Criar o construtor com nome
         public Funcionario(string nome) : base(nome)
         {
@@ -31,5 +33,11 @@ namespace Fiap.HelloWorld.UI.Models
         {
             Console.WriteLine("Funcionario sonhando no aumento");
         }
+    }//class
+
+    internal enum TipoContrato
+    {
+        Clt, Pj, Estatutario
     }
-}
+
+}//namespace
