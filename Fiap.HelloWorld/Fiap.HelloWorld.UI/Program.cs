@@ -41,6 +41,19 @@ var repository = new PessoaRepository();
 repository.Cadastrar(cliente);
 repository.Cadastrar(pessoa);
 
+//Cadastrar uma pessoa sem nome
+var aluno = new Cliente("");
+
+try
+{
+    //Tratar a possível exception
+    repository.Cadastrar(aluno);
+}
+catch (ArgumentException e)
+{
+    Console.WriteLine(e.Message);
+}
+
 //Exibir a quantidade de pessoas
 Console.WriteLine($"Pessoas cadastradas: {repository.Contar()}");
 

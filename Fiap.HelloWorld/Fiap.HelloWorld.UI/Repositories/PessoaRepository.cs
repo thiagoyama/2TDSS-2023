@@ -14,11 +14,16 @@ namespace Fiap.HelloWorld.UI.Repositories
 
         public void Cadastrar(Pessoa pessoa)
         {
+            //Nome da pessoa estiver vazio, lançar uma exception
+            if (String.IsNullOrEmpty(pessoa.Nome))
+            {
+                throw new ArgumentException("Nome é obrigatório");
+            }
             _lista.Add(pessoa);
         }
 
         public int Contar()
-        {
+        {            
             return _lista.Count;
         }
 
