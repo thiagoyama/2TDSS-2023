@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fiap.Exercicio01.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,12 +10,7 @@ namespace Fiap.Banco.Models
     //sealed: a classe não pode ser herdada
     internal sealed class ContaCorrente : Conta
     {
-        public TipoConta Tipo { get; set; } 
-
-        public override void Depositar(decimal valor)
-        {
-            Saldo += valor;
-        }
+        public TipoConta Tipo { get; set; }              
 
         //Se a conta for comum e o saldo fica negativo depois do saque deve lançar uma exceção e não permitir a retirada.
         public override void Retirar(decimal valor)
@@ -25,7 +21,7 @@ namespace Fiap.Banco.Models
             }
             if (Tipo == TipoConta.Comum && Saldo < valor)
             {
-                throw new ArgumentException("Saldo insuficiente");
+                throw new SaldoInsuficienteException(Saldo);
             }
             Saldo -= valor;
         }

@@ -14,7 +14,16 @@ namespace Fiap.Banco.Models
         public DateTime DataAbertura { get; set; }
         public decimal Saldo { get; protected set; }
 
-        public abstract void Depositar(decimal valor);
+        //virtual: permite a sobrescrita do método
+        public virtual void Depositar(decimal valor)
+        {
+            if (valor < 0)
+            {
+                throw new ArgumentException("Valor não pode ser negativo");
+            }
+            Saldo += valor;
+        }
+
         public abstract void Retirar(decimal valor);
     }
 }
