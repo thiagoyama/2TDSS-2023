@@ -24,6 +24,13 @@ namespace Fiap.Banco.Models
             Saldo += valor;
         }
 
-        public abstract void Retirar(decimal valor);
+        public virtual void Retirar(decimal valor)
+        {
+            if (valor < 0)
+            {
+                throw new ArgumentException("Valor não pode ser negativo");
+            }
+            Saldo -= valor;
+        }
     }
 }

@@ -15,15 +15,12 @@ namespace Fiap.Banco.Models
         //Se a conta for comum e o saldo fica negativo depois do saque deve lançar uma exceção e não permitir a retirada.
         public override void Retirar(decimal valor)
         {
-            if (valor < 0)
-            {
-                throw new ArgumentException("Valor não pode ser negativo");
-            }
             if (Tipo == TipoConta.Comum && Saldo < valor)
             {
                 throw new SaldoInsuficienteException(Saldo);
             }
-            Saldo -= valor;
+            //Chamar o Retirar do pai (Conta)
+            base.Retirar(valor);
         }
     }
 

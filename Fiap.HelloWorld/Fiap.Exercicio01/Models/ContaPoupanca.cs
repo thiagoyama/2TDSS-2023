@@ -27,16 +27,12 @@ namespace Fiap.Banco.Models
 
         //verifica se o saldo é suficiente, se for deve descontar também a Taxa de retirada, se não, lance uma exceção
         public override void Retirar(decimal valor)
-        {
-            if (valor < 0)
-            {
-                throw new ArgumentException("Valor não pode ser negativo");
-            }
+        {         
             if (Saldo < valor + Taxa)
             {
                 throw new SaldoInsuficienteException(Saldo - Taxa);
             }
-            Saldo -= valor + Taxa;
+            base.Retirar(valor + Taxa);
         }
     }
 }
