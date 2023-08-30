@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Disney Movies</h1>
+
+<!-- Criar um formulário com Nome, Ano Lançamento, Faturamento e botão -->
+<form action="/movie/index" method="post">
+    <div class="mb-3">
+        <label for="id-nome">Nome</label>
+        <input type="text" id="id-nome" class="form-control" name="nome"/>
+    </div>
+    <div class="mb-3">
+        <label for="id-ano">Ano Lançamento</label>
+        <input type="number" id="id-ano" class="form-control" name="ano"/>
+    </div>
+    <div class="mb-3">
+        <label for="id-faturamento">Faturamento</label>
+        <input type="number" id="id-faturamento" class="form-control" name="faturamento"/>
+    </div>
+    <button class="btn btn-primary">Cadastrar</button>
+</form>
