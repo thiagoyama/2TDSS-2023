@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "Calcular";
+}
+
+<h1>Calculo de Média</h1>
+<form action="/media/calcular" method="post">
+    <div class="mb-3">
+        <label for="media1">Média 1</label>
+        <input type="text" name="media1" id="media1" class="form-control"/>
+    </div>
+    <div class="mb-3">
+        <label for="media2">Média 2</label>
+        <input type="text" name="media2" id="media2" class="form-control"/>
+    </div>    
+    <button class="btn btn-success float-end">Calcular</button>
+</form>
+
+<h2>@ViewBag.churros</h2>
+
