@@ -1,0 +1,35 @@
+﻿@model Usuario
+@{
+    ViewData["Title"] = "Cadastro";
+}
+
+<h1>Cadastro</h1>
+
+@if (Model != null)
+{
+    <p>@ViewData["msg"]</p>
+    <p>
+        @Model?.Nome, @Model?.DataNascimento, @Model?.Email
+    </p>
+} else
+{
+    <p>Preencha o formulário</p>
+}
+
+
+<form action="/usuario/cadastro" method="post">
+    <div class="mb-3">
+        <label>Nome</label>
+        <input type="text" name="nome" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Data Nascimento</label>
+        <input type="text" name="dataNascimento" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>E-mail</label>
+        <input type="text" name="email" class="form-control" />
+    </div>
+    <button class="btn btn-primary">Cadastrar</button>
+</form>
+
