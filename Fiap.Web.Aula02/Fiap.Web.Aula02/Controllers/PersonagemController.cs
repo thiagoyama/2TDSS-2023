@@ -7,6 +7,28 @@ namespace Fiap.Web.Aula02.Controllers
     {
         //Armazenar os personagens em memória
         private static List<Personagem> _lista = new List<Personagem>();
+        private static int _count = 0;
+
+        [HttpPost]
+        public IActionResult Editar(Personagem personagem)
+        {
+            //Alterar o personagem na lista
+            var index = _lista.FindIndex(p => p.Id == personagem.Id);
+            _lista[index] = personagem;
+            //Mensagem de sucesso
+            TempData["msg"] = "Personagem atualizado!";
+            //Redirect para a listagem'
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Editar(int id)
+        {
+            //Pesquisar o personagem pelo id
+            var churros = _lista.First(p => p.Id == id);
+            //Retornar a view com os dados do personagem
+            return View(churros);
+        }
 
         //Listar os personagens (Criar uma página com uma tabela HTML)
         [HttpGet]
@@ -19,9 +41,10 @@ namespace Fiap.Web.Aula02.Controllers
         [HttpPost]
         public IActionResult Cadastrar(Personagem personagem)
         {
+            personagem.Id = ++_count;
             _lista.Add(personagem);
-            ViewBag.mensagem = "Personagem cadastrado!";
-            return View();
+            TempData["msg"] = "Personagem cadastrado!";
+            return RedirectToAction("Cadastrar"); //Action método
         }
 
         [HttpGet]

@@ -1,21 +1,14 @@
 ﻿@model Personagem
 
 @{
-    ViewData["Title"] = "Cadastrar";
+    ViewData["Title"] = "Editar";
 }
 
-<h1>Cadastro de Personagem</h1>
-
-@if (TempData["msg"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["msg"]
-    </div>
-}
+<h1>Edição de Personagem</h1>
 
 <a asp-action="Index">Lista de Personagem</a>
 
-<form asp-action="cadastrar">
+<form asp-action="editar">
     <div class="mb-3">
         <label asp-for="Nome"></label>
         <input asp-for="Nome" class="form-control" />
@@ -32,6 +25,6 @@
         <input asp-for="Capa" />
         <label asp-for="Capa"></label>
     </div>
-    <button class="btn btn-success">Cadastrar</button>
+    <button class="btn btn-success">Editar</button>
 </form>
 
