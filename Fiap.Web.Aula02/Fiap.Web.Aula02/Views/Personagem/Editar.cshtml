@@ -22,6 +22,12 @@
         <input asp-for="DataCriacao" class="form-control" />
     </div>
     <div class="mb-3">
+        <label asp-for="Empresa"></label>
+        <select asp-for="Empresa" asp-items="@Html.GetEnumSelectList<Empresa>()" class="form-select">
+            <option>Selecione</option>
+        </select>
+    </div>
+    <div class="mb-3">
         <input asp-for="Capa" />
         <label asp-for="Capa"></label>
     </div>

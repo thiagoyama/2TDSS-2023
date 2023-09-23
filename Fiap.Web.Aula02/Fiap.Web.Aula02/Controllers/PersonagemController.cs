@@ -10,6 +10,18 @@ namespace Fiap.Web.Aula02.Controllers
         private static int _count = 0;
 
         [HttpPost]
+        public IActionResult Excluir(int id)
+        {
+            //Remover o personagem da lista
+            var p = _lista.First(p =>  p.Id == id);
+            _lista.Remove(p);
+            //Enviar uma mensagem para a view
+            TempData["msg"] = "Personagem removido!";
+            //Redirect para a listagem'
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
         public IActionResult Editar(Personagem personagem)
         {
             //Alterar o personagem na lista

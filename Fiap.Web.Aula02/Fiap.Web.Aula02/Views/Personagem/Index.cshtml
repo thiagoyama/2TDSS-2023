@@ -6,6 +6,13 @@
 
 <h1>Personagens</h1>
 
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["msg"]
+    </div>
+}
+
 <a asp-action="cadastrar">Cadastrar</a>
 <table class="table">
     <tr>
@@ -13,6 +20,7 @@
         <th>Nome</th>
         <th>Capa</th>
         <th>Nível Energia</th>
+        <th>Empresa</th>
         <th>Data Criação</th>
         <th></th>
     </tr>
@@ -21,13 +29,39 @@
         <tr>
             <td>@item.Id</td>
             <td>@item.Nome</td>
-            <td>@item.Capa</td>
+            <td>@(item.Capa?"Sim":"Não")</td>
             <td>@item.NivelEnergia</td>
-            <td>@item.DataCriacao</td>
+            <td>@item.Empresa</td>
+            <td>@item.DataCriacao.ToShortDateString()</td>
             <td>
-                <a asp-action="editar" asp-route-id="@item.Id">Editar</a>
+                <a asp-action="editar" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Editar</a>
+                <!-- Button trigger modal -->
+                <button onclick="key.value = @item.Id" type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Remover
+                </button>
             </td>
         </tr>
     }
 </table>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmação</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Deseja realmente apagar o personagem?
+            </div>
+            <div class="modal-footer">
+                <form asp-action="excluir">
+                    <input type="hidden" name="id" id="key"/>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                    <button type="submit" class="btn btn-danger">Sim</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
