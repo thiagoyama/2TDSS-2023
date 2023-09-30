@@ -6,12 +6,7 @@
 
 <h1>Cadastro de Personagem</h1>
 
-@if (TempData["msg"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["msg"]
-    </div>
-}
+<alert mensagem="@TempData["msg"]"></alert>
 
 <a asp-action="Index">Lista de Personagem</a>
 
@@ -38,6 +33,6 @@
         <input asp-for="Capa" />
         <label asp-for="Capa"></label>
     </div>
-    <button class="btn btn-success">Cadastrar</button>
+    <churros></churros>
 </form>
 

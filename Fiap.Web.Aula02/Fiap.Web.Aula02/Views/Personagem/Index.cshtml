@@ -6,12 +6,7 @@
 
 <h1>Personagens</h1>
 
-@if (TempData["msg"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["msg"]
-    </div>
-}
+<alert mensagem="@TempData["msg"]"></alert>
 
 <a asp-action="cadastrar">Cadastrar</a>
 <table class="table">
