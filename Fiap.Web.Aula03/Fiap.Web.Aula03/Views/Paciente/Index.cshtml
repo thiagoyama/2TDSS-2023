@@ -1,0 +1,26 @@
+﻿@model List<Paciente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Pacientes</h1>
+
+<table class="table table-striped">
+    <tr>
+        <th>Nome</th>
+        <th>Cpf</th>
+        <th>Data Nascimento</th>
+        <th>Tipo de Atendimento</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Nome</td>
+            <td>@item.Cpf</td>
+            <td>@item.DataNascimento.ToShortDateString()</td>
+            <td>@item.ModalidadeAtendimento</td>
+        </tr>
+    }
+</table>
+
