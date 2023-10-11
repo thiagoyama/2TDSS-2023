@@ -7,11 +7,37 @@ namespace Fiap.Web.Aula03.Controllers
     public class PacienteController : Controller
     {        
         private HospitalContext _context;
-
+         
         //Recebe o DbContext por injeção de dependência
         public PacienteController(HospitalContext context)
         {
             _context = context;
+        }
+
+        [HttpPost]
+        public IActionResult Excluir(int id)
+        {
+            var paciente = _context.Pacientes.Find(id);
+            _context.Pacientes.Remove(paciente);
+            _context.SaveChanges();
+            TempData["msg"] = "Paciente removido!";
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Editar(Paciente paciente)
+        {
+            _context.Pacientes.Update(paciente);
+            _context.SaveChanges();
+            TempData["msg"] = "Paciente atualizado";
+            return RedirectToAction("index");
+        }
+
+        [HttpGet]
+        public IActionResult Editar(int id)
+        {
+            var paciente = _context.Pacientes.Find(id);
+            return View(paciente);
         }
 
         //Criar o cadastro de paciente (Criar o método GET para abrir a página com o form HTML)

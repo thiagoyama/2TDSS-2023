@@ -1,0 +1,13 @@
+﻿@model Paciente
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<h1>Atualizar o paciente: @Model.Nome</h1>
+
+<form asp-action="editar">
+    <partial name="_Form" />
+    <input asp-for="PacienteId" />
+    <button class="btn btn-primary">Editar</button>
+</form>
+

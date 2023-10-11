@@ -5,13 +5,19 @@
 }
 
 <h1>Pacientes</h1>
-
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["msg"]
+    </div>
+}
 <table class="table table-striped">
     <tr>
         <th>Nome</th>
         <th>Cpf</th>
         <th>Data Nascimento</th>
         <th>Tipo de Atendimento</th>
+        <th></th>
     </tr>
     @foreach (var item in Model)
     {
@@ -20,7 +26,37 @@
             <td>@item.Cpf</td>
             <td>@item.DataNascimento.ToShortDateString()</td>
             <td>@item.ModalidadeAtendimento</td>
+            <td>
+                <a asp-action="editar" asp-route-id="@item.PacienteId"
+                   class="btn btn-sm btn-outline-info">Editar</a>
+                <!-- Button trigger modal -->
+                <button onclick="key.value = @item.PacienteId" type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Remover
+                </button>
+            </td>
         </tr>
     }
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmação</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Deseja realmente apagar o paciente?
+            </div>
+            <div class="modal-footer">
+                <form asp-action="excluir">
+                    <input type="hidden" name="id" id="key" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                    <button type="submit" class="btn btn-danger">Sim</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
