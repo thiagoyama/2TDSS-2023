@@ -11,6 +11,15 @@
         @TempData["msg"]
     </div>
 }
+
+<form class="row" asp-action="index" method="get">
+    <div class="col-4">
+        <input name="filtro" class="form-control" type="text" placeholder="Digite o nome"/>
+    </div>
+    <button class="col-2 btn btn-success">Pesquisar</button>
+</form>
+
+<a asp-action="cadastrar">Cadastrar</a>
 <table class="table table-striped">
     <tr>
         <th>Nome</th>

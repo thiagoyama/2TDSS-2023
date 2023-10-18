@@ -59,9 +59,10 @@ namespace Fiap.Web.Aula03.Controllers
             return RedirectToAction("cadastrar");
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string filtro = "")
         {                      
-            var lista = _context.Pacientes.ToList();
+            var lista = _context.Pacientes
+                .Where(p => p.Nome.Contains(filtro) || string.IsNullOrEmpty(filtro)).ToList();
             return View(lista);
         }
     }
