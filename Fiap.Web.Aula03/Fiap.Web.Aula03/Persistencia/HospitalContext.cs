@@ -7,6 +7,10 @@ namespace Fiap.Web.Aula03.Persistencia
     public class HospitalContext : DbContext
     {
         public DbSet<Paciente> Pacientes { get; set; }
+        public DbSet<Medico> Medicos { get; set; }
+        public DbSet<Medicamento> Medicamentos { get; set; }
+        public DbSet<Exame> Exames { get; set; }
+        public DbSet<Endereco> Enderecos { get; set; }
 
         public HospitalContext(DbContextOptions op) : base(op) { }
     }

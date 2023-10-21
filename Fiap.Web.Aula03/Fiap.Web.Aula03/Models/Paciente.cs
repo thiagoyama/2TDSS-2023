@@ -22,6 +22,17 @@ namespace Fiap.Web.Aula03.Models
 
         [Column("Ds_Modalidade"), Required, Display(Name = "Modalidade")]
         public ModalidadeAtendimento ModalidadeAtendimento { get; set; }
+
+        //1:1
+        public Endereco Endereco { get; set; }
+        public int EnderecoId { get; set; }
+
+        //1:N
+        public IList<Exame> Exames { get; set; }
+
+        //N:M
+        public IList<PacienteMedicamento> PacientesMedicamentos { get; set; }
+
     }
 
     public enum ModalidadeAtendimento
