@@ -1,6 +1,7 @@
 ﻿using Fiap.Web.Aula03.Models;
 using Fiap.Web.Aula03.Persistencia;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fiap.Web.Aula03.Controllers
 {
@@ -36,7 +37,8 @@ namespace Fiap.Web.Aula03.Controllers
         [HttpGet]
         public IActionResult Editar(int id)
         {
-            var paciente = _context.Pacientes.Find(id);
+            var paciente = _context.Pacientes
+                .Include(p => p.Endereco).First(p => p.PacienteId == id);
             return View(paciente);
         }
 
@@ -62,7 +64,9 @@ namespace Fiap.Web.Aula03.Controllers
         public IActionResult Index(string filtro = "")
         {                      
             var lista = _context.Pacientes
-                .Where(p => p.Nome.Contains(filtro) || string.IsNullOrEmpty(filtro)).ToList();
+                .Where(p => p.Nome.Contains(filtro) || string.IsNullOrEmpty(filtro))
+                .Include(p => p.Endereco) //Inclui no resultado o endereço do Paciente
+                .ToList();
             return View(lista);
         }
     }

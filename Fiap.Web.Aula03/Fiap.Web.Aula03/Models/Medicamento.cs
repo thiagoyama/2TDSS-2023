@@ -9,7 +9,7 @@ namespace Fiap.Web.Aula03.Models
         public int MedicamentoId { get; set; }
         [Required]
         public string Nome { get; set; }
-        public DateOnly Validade { get; set; }
+        public DateTime Validade { get; set; }
         public string Laboratorio { get; set; }
         public IList<PacienteMedicamento> PacientesMedicamentos { get; set; }
     }
