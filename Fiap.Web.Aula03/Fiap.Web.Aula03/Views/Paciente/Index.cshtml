@@ -44,6 +44,7 @@
                 <button onclick="key.value = @item.PacienteId" type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Remover
                 </button>
+                <a asp-action="exames" asp-route-id="@item.PacienteId" class="btn btn-sm btn-outline-primary">Exames</a>
             </td>
         </tr>
     }

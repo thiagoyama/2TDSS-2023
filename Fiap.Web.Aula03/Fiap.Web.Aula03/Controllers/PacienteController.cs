@@ -16,6 +16,23 @@ namespace Fiap.Web.Aula03.Controllers
         }
 
         [HttpPost]
+        public IActionResult Agendar(Exame exame)
+        {
+            _context.Exames.Add(exame);
+            _context.SaveChanges();
+            TempData["msg"] = "Exame agendado!";
+            return RedirectToAction("Exames", new { id = exame.PacienteId} );
+        }
+
+        [HttpGet]
+        public IActionResult Exames(int id)
+        {
+            //Pesquisar o paciente para enviar para view
+            ViewBag.paciente = _context.Pacientes.Find(id);
+            return View();
+        }
+
+        [HttpPost]
         public IActionResult Excluir(int id)
         {
             var paciente = _context.Pacientes.Find(id);

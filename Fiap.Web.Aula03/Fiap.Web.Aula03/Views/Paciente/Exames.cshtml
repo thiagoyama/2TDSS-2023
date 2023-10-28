@@ -1,0 +1,44 @@
+﻿@model Exame
+
+@{
+    ViewData["Title"] = "Exames";
+}
+
+<h2>Paciente: @ViewBag.Paciente.Nome</h2>
+<hr />
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["msg"]
+    </div>
+}
+<div class="row">
+    <div class="col-6">
+        <h3>Agendar</h3>
+        <form asp-action="agendar">
+    <input type="hidden" asp-for="PacienteId" 
+                    value="@ViewBag.Paciente.PacienteId" />
+    <div class="mb-3"> 
+        <label asp-for="Nome"></label>
+        <input asp-for="Nome" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Descricao"></label>
+        <textarea asp-for="Descricao" class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Preparo"></label>
+        <textarea asp-for="Preparo" class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Data"></label>
+        <input asp-for="Data" class="form-control" />
+    </div>
+    <button class="btn btn-success">Agendar</button>
+</form>
+    </div>
+    <div class="col-6">
+        <h3>Exames</h3>
+    </div>
+</div>
+
