@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 namespace Fiap.Web.Aula03.Controllers
 {
     public class PacienteController : Controller
-    {        
+    {
         private HospitalContext _context;
-         
+
         //Recebe o DbContext por injeção de dependência
         public PacienteController(HospitalContext context)
         {
@@ -21,16 +21,37 @@ namespace Fiap.Web.Aula03.Controllers
             _context.Exames.Add(exame);
             _context.SaveChanges();
             TempData["msg"] = "Exame agendado!";
-            return RedirectToAction("Exames", new { id = exame.PacienteId} );
+            return RedirectToAction("Exames", new { id = exame.PacienteId });
         }
 
         [HttpGet]
         public IActionResult Exames(int id)
         {
+            //Enviar a lista de exames do paciente para a view
+            ViewBag.exames = _context.Exames
+                .Where(e => e.PacienteId == id).ToList();
+
             //Pesquisar o paciente para enviar para view
             ViewBag.paciente = _context.Pacientes.Find(id);
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Medicamentos(int id)
+        {
+            //Pesquisa na tabela associativa pelo Id do paciente
+            //Retornando o medicamento associado
+            ViewBag.medicamentos = _context.PacientesMedicamentos
+                .Where(p => p.PacienteId == id)
+                .Select(m => m.Medicamento)
+                .ToList();
+
+            //Pesquisar o paciente para enviar para view
+            ViewBag.paciente = _context.Pacientes.Find(id);
+
+            return View();
+        }
+
 
         [HttpPost]
         public IActionResult Excluir(int id)
@@ -79,7 +100,7 @@ namespace Fiap.Web.Aula03.Controllers
         }
 
         public IActionResult Index(string filtro = "")
-        {                      
+        {
             var lista = _context.Pacientes
                 .Where(p => p.Nome.Contains(filtro) || string.IsNullOrEmpty(filtro))
                 .Include(p => p.Endereco) //Inclui no resultado o endereço do Paciente
