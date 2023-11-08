@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "Medicamentos";
+}
+
+<h1>@ViewBag.paciente.Nome</h1>
+<hr />
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["msg"]
+    </div>
+}
+<form class="row" asp-action="adicionar">
+    <div class="col-4">
+        <input type="hidden" name="PacienteId" value="@ViewBag.paciente.PacienteId" />
+        <select name="MedicamentoId" class="form-select" asp-items="@ViewBag.select">
+            <option>Selecione</option>
+        </select>
+    </div>
+    <button class="btn btn-success col-2">Adicionar</button>
+</form>
+
+<table class="table">
+    <tr>
+        <th>Nome</th>
+        <th>Data Validade</th>
+        <th>Laboratório</th>
+    </tr>
+    @foreach (var item in ViewBag.medicamentos)
+    {
+        <tr>
+            <td>@item.Nome</td>
+            <td>@item.Validade.ToShortDateString()</td>
+            <td>@item.Laboratorio</td>
+        </tr>
+    }
+</table>

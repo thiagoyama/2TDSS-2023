@@ -1,6 +1,7 @@
 ﻿using Fiap.Web.Aula03.Models;
 using Fiap.Web.Aula03.Persistencia;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fiap.Web.Aula03.Controllers
@@ -36,15 +37,35 @@ namespace Fiap.Web.Aula03.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult adicionar(PacienteMedicamento pacienteMedicamento)
+        {
+            _context.PacientesMedicamentos.Add(pacienteMedicamento);
+            _context.SaveChanges();
+            TempData["msg"] = "Medicamento associado";
+            return RedirectToAction("Medicamentos", new { id = pacienteMedicamento.PacienteId });
+        }
+
         [HttpGet]
         public IActionResult Medicamentos(int id)
         {
             //Pesquisa na tabela associativa pelo Id do paciente
             //Retornando o medicamento associado
-            ViewBag.medicamentos = _context.PacientesMedicamentos
+            var medicamentosAssociados = _context.PacientesMedicamentos
                 .Where(p => p.PacienteId == id)
                 .Select(m => m.Medicamento)
                 .ToList();
+
+            ViewBag.medicamentos = medicamentosAssociados;
+
+            //Pesquisar todos os medicamentos
+            var todosMedicamentos = _context.Medicamentos.ToList();
+
+            var medicamentosFiltrados = todosMedicamentos
+                .Where(m => !medicamentosAssociados.Contains(m));
+
+            //Enviar o selectlist para preencher o select na tela
+            ViewBag.select = new SelectList(medicamentosFiltrados, "MedicamentoId", "Nome");
 
             //Pesquisar o paciente para enviar para view
             ViewBag.paciente = _context.Pacientes.Find(id);

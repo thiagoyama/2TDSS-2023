@@ -15,7 +15,7 @@ namespace Fiap.Web.Aula03.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(_context.Medicamentos.ToList());
         }
 
         [HttpGet]
